@@ -4,7 +4,7 @@
 
 
 2. Utilizar MockAPI
-   [jsonplaceholder]: url(https://jsonplaceholder.typicode.com/)
+   [jsonplaceholder]: https://jsonplaceholder.typicode.com/
    
 ### Java Utils
 
