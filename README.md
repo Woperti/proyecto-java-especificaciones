@@ -1,7 +1,6 @@
-# Proyecto 5 Semestre programacion en Java
+# Proyecto 5 - Semestre programacion en Java
 
 ## Planeacion y administracion
-
 
 ## Diseno
 Destacar los siguientes puntos:
