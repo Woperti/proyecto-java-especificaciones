@@ -86,19 +86,27 @@ Disenar el parametro de la reservacion. Ejemplo: POST v1/reservations
    Una base de datos relacional funciona.
    
 Ejemplo:
-[tables](./tables.png)
+![tables](./tables.jpeg)
+
+Diseno mejorado
+![tables](./tables-mejorado.jpeg)
 
 Finalmente se disenara como seria un High-level design en el backend con springboot y Java. Con fines de aprendizaje.
 Solo sera el diagrama final de como funcionaria el proyecto en un entorno verdadero.
 
-[high-level-desing](./designhighlevel.png)
+![high-level-desing](./designhighlevel.jpeg)
 
 Netbeans, haremos un backend con Java y Springboot y usaremos mysql como base de datos.
 Generar el proyecto desde: https://start.spring.io/ 
 
 Seguir la configuracion de la imagen: 
-   [spring-config](./spring.png)
-   
+![spring-config](./spring.png)
+
+Dar en generar, abrir archivo y descomprimirlo.
+
+Abir Netbeans y dar la opcion de abrir proyecto. 
+Busca la ruta del archivo que descargaste y abrelo. Tardara unos minutos.
+
 ## Pruebas
 Requerimientos por individuo
 
