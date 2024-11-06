@@ -107,7 +107,7 @@ mysql
 
 Se vera como:
 
-![database-online](./images/db-online)
+![database-online](./images/db-online.png)
 
 Usaremos los datos para conectarnos a la app y hacer consultas en DBeaver
 
