@@ -96,17 +96,178 @@ Solo sera el diagrama final de como funcionaria el proyecto en un entorno verdad
 
 ![high-level-desing](./designhighlevel.jpeg)
 
-Netbeans, haremos un backend con Java y Springboot y usaremos mysql como base de datos.
-Generar el proyecto desde: https://start.spring.io/ 
+Netbeans, haremos un backend con Java y mysql
 
-Seguir la configuracion de la imagen: 
-![spring-config](./spring.png)
+mysql
 
-Dar en generar, abrir archivo y descomprimirlo.
+1.Entrar a: https://aiven.io/ 
+2. Crear una cuenta
+3. Crear una base de datos mysql
+4. Escoger siempre todo gratis.
 
-Abir Netbeans y dar la opcion de abrir proyecto. 
-Busca la ruta del archivo que descargaste y abrelo. Tardara unos minutos.
+Se vera como:
 
+![database-online](./images/db-online)
+
+Usaremos los datos para conectarnos a la app y hacer consultas en DBeaver
+
+Netbeans
+1. Crear proyecto Java with Maven -> Java Application
+2. Next -> Nombrar por ejemplo: API o SimpleAPI -> Finish
+3. Anadir las dependencias:
+   ```xml
+    <dependencies>
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.25</version>
+        </dependency>
+    </dependencies>
+   ```
+   
+4. En el archivo principal : src->main->java->com->mycompany->apisimple->ApiSimple.java, dependera de como se llame la clase principal.
+```java
+package com.mycompany.apisimple;
+import static spark.Spark.*;
+
+import com.google.gson.Gson;
+
+public class ApiSimple {
+public static void main(String[] args) {
+        port(8000); // Define el puerto para el servidor
+
+        Gson gson = new Gson();
+
+        get("/api/hello", (req, res) -> {
+            res.type("application/json");
+            return gson.toJson(new Message("Hello, world!"));
+        });
+
+        get("/api/data", (req, res) -> {
+            res.type("application/json");
+            return gson.toJson(new int[]{1, 2, 3, 4});
+        });
+    }
+
+    static class Message {
+        private String message;
+
+        public Message(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+}
+```
+
+Conexion con DBeaver
+Paso 1. Dar click en el boton de nueva conexion.
+Paso 2. Conectar y se vera algo como:
+
+![connect](./images/db-connect.png)
+
+y llenar los campos con los datos obtenidos en aiven. Quedara:
+![succes](./images/db-succes.png)
+
+Dar el boton de RUN(play) para probar que todo funcione
+Ver una salida en Netbeans:
+![salida](./images/salida-netbeans.png)
+
+y en el navegador: http://localhost:8000/api/hello 
+![salida](./images/salida-browser.png)
+
+Conectar la base de datos a Netbeans
+
+Dentro de util anadir dos archivos 
+CORSConfig.java
+```Java
+package com.mycompany.apisimple.util;
+import static spark.Spark.*;
+
+public class CORSConfig {
+    public static void enableCORS(String origin) {
+        options("/*", (req, res) -> {
+            String accessControlRequestHeaders = req.headers("Access-Control-Request-Headers");
+            String accessControlRequestMethod = req.headers("Access-Control-Request-Method");
+
+            // Permitir el acceso a todas las solicitudes desde el origen proporcionado
+            res.header("Access-Control-Allow-Origin", origin);
+            res.header("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
+            res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, X-Custom-Header");
+            res.header("Access-Control-Allow-Credentials", "true");
+            res.header("Access-Control-Max-Age", "3600");
+
+            return "OK";
+        });
+
+        // Configurar las solicitudes HTTP reales (GET, POST, PUT, DELETE, etc.)
+        before((req, res) -> {
+            res.header("Access-Control-Allow-Origin", origin);
+            res.header("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
+            res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, X-Custom-Header");
+            res.header("Access-Control-Allow-Credentials", "true");
+        });
+    }
+}
+```
+y Database.java
+
+```Java
+package com.mycompany.apisimple.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Database {
+    private static final String URL = "tu_service_url";
+    private static final String USER = "tu usuario";
+    private static final String PASSWORD = "tu_contrasena";
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+}
+```
+Anadir este codigo en la clase principal:
+
+```Java
+      CORSConfig.enableCORS("*");
+        
+        try (Connection connection = Database.getConnection()) {
+            if (connection != null) {
+                System.out.println("¡Conexión exitosa a la base de datos!");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al conectar a la base de datos: " + e.getMessage());
+        }
+```
+*** Checar las rutas de importacion.
+
+Mensaje final al correr el programa si todo esta bien
+![con-db](./images/success-db-con.png)
+Problemas:
+1. Abrir terminal: window->IDE Tools->Terminal
+2. Si es un problema con el puerto
+3. Correr estos dos comandos en orden: 
 ## Pruebas
 Requerimientos por individuo
 
