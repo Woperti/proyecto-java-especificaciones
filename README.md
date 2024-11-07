@@ -4,6 +4,7 @@
 
 ## Diseno
 Destacar los siguientes puntos:
+
 1. Comprension del problema (definir problema y objetivos)
 2. Investigacion de campo (encuestas, entrevistas, grupos focales)
 3. Analisis de la competencia(buscar apps similares)
@@ -94,7 +95,7 @@ Diseno mejorado
 Finalmente se disenara como seria un High-level design en el backend con springboot y Java. Con fines de aprendizaje.
 Solo sera el diagrama final de como funcionaria el proyecto en un entorno verdadero.
 
-![high-level-desing](./designhighlevel.jpeg)
+![high-level-design](./designhighlevel.jpeg)
 
 Netbeans, haremos un backend con Java y mysql
 
@@ -114,7 +115,10 @@ Usaremos los datos para conectarnos a la app y hacer consultas en DBeaver
 Netbeans
 1. Crear proyecto Java with Maven -> Java Application
 2. Next -> Nombrar por ejemplo: API o SimpleAPI -> Finish
-3. Anadir las dependencias:
+3. Anadir las dependencias en el archivo: pom.xml
+
+IMPORTANTE: Crear el proyecto con Maven para que genere el archivo pom.xml
+
    ```xml
     <dependencies>
         <dependency>
