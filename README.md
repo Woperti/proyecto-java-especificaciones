@@ -278,9 +278,10 @@ Salida:
 ![hoppscotch](./images/hoppscotch.png)
 
 Problemas:
-1. Abrir terminal: window->IDE Tools->Terminal
+1. Abrir terminal: window->IDE Tools->Terminal en Netbeans
 2. Si es un problema con el puerto
-3. Correr estos dos comandos en orden: 
+3. Correr estos dos comandos en orden:
+   
 ## Pruebas
 Requerimientos por individuo
 
