@@ -145,6 +145,7 @@ IMPORTANTE: Crear el proyecto con Maven para que genere el archivo pom.xml
    ```
    
 4. En el archivo principal : src->main->java->com->mycompany->apisimple->ApiSimple.java, dependera de como se llame la clase principal.
+   
 ```java
 package com.mycompany.apisimple;
 import static spark.Spark.*;
@@ -202,6 +203,7 @@ Conectar la base de datos a Netbeans
 
 Dentro de util anadir dos archivos 
 CORSConfig.java
+
 ```Java
 package com.mycompany.apisimple.util;
 import static spark.Spark.*;
@@ -264,10 +266,17 @@ Anadir este codigo en la clase principal:
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
         }
 ```
+
+
 *** Checar las rutas de importacion.
 
 Mensaje final al correr el programa si todo esta bien
 ![con-db](./images/success-db-con.png)
+
+Probar tambien en https://hoppscotch.io/
+Salida: 
+![hoppscotch](./images/hoppscotch.png)
+
 Problemas:
 1. Abrir terminal: window->IDE Tools->Terminal
 2. Si es un problema con el puerto
